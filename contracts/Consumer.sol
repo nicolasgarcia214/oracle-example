@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.7.3;
 
-import './IOracle.sol'
+import './IOracle.sol';
 
 contract Consumer {
     IOracle public oracle;
@@ -10,11 +10,11 @@ contract Consumer {
         oracle = IOracle(_oracle);
     }
 
-    function foo() external{
+    function foo() external view{
         bytes32 key = keccak256(abi.encodePacked("BTC/USD"));
 
         (bool result, uint timestamp, uint data) = oracle.getData(key);
         require(result == true, "Could not get price");
-        require(timestamp >= block.timestamp - 2 minuter, "price to old");
+        require(timestamp >= block.timestamp - 2 minutes, "price to old");
     }
 }
